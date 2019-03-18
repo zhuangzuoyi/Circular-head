@@ -86,6 +86,7 @@ void circle_head::paintEvent(QPaintEvent *)
     }else{
         drawpic(&p);
         drawCover(&p);
+        draw_external(&p);
     }
 
     if(is_show_border)
@@ -178,6 +179,46 @@ void circle_head::drawpic(QPainter *p)
         qDebug()<<"scale to height";
     }
     p->drawPixmap(img_x_s,img_y_s, pix_scaled);
+    p->restore();
+}
+
+
+void circle_head::draw_external(QPainter *p)
+{
+    p->save();
+    QPen pen(Qt::white);
+    p->setPen(pen);
+    p->setBrush(QColor(255,255,255));
+    int last_img_s_x = cover_x_s+cover_pen_width/2;
+    int last_img_s_y = cover_y_s+cover_pen_width/2;
+    int last_img_width = cover_x_e-cover_pen_width;
+
+    int x,y,w,h;
+    x=0;
+    y=0;
+    w = last_img_s_x;
+    h = this->height();
+    p->drawRect(x,y,w,h);
+
+    w = this->width();
+    h = last_img_s_y;
+    p->drawRect(x,y,w,h);
+
+
+    x = 0;
+    y = last_img_s_y + last_img_width;
+
+    w = this->width();
+    if(this->height() >(last_img_s_y + last_img_width))
+        h = this->height() - (last_img_s_y + last_img_width);
+    p->drawRect(x,y,w,h);
+
+    x = last_img_s_x + last_img_width;
+    if(this->width() > x)
+        w = this->width() - x;
+    h = this->width();
+    y=0;
+    p->drawRect(x,y,w,h);
     p->restore();
 }
 

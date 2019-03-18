@@ -20,6 +20,7 @@ private:
     void wheelEvent(QWheelEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
+    void draw_external(QPainter *p);
     QString SourceFile;
     bool isImgShow;
     int cover_pen_width;
