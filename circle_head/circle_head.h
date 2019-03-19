@@ -15,6 +15,7 @@ public:
     void drawCoverFirst(QPainter *p);
     void saveImg(void);
     void show_msg(void);
+    void saveImg(QString path);
 private:
     void mousePressEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);

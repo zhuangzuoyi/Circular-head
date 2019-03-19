@@ -1,6 +1,8 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "QFileDialog"
+#include "QDebug"
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -24,5 +26,7 @@ void Widget::on_openfile_clicked()
 
 void Widget::on_pushButton_clicked()
 {
-    this->ui->editarea->saveImg();
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Save image"), "circle.png", tr("ImageFile (*.png *.bmp *.jpg)"));
+     qDebug()<<fileName;
+    this->ui->editarea->saveImg(fileName);
 }

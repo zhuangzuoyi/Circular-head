@@ -19,9 +19,6 @@ circle_head::circle_head(QWidget *parent) : QWidget(parent)
 
 void circle_head::saveImg(void)
 {
-
-//    QPixmap Img = this->grab();
-//    Img.save("Img.png");
     qDebug()<<"Last:"<<cover_x_s+cover_pen_width/2<<cover_y_s+cover_pen_width/2<<cover_x_e-cover_pen_width<<cover_y_e-cover_pen_width;
     //
     QPixmap Img = this->grab();
@@ -34,6 +31,23 @@ void circle_head::saveImg(void)
 
     this->update();
 }
+
+void circle_head::saveImg(QString path)
+{
+    qDebug()<<"Last:"<<cover_x_s+cover_pen_width/2<<cover_y_s+cover_pen_width/2<<cover_x_e-cover_pen_width<<cover_y_e-cover_pen_width;
+    //
+    QPixmap Img = this->grab();
+    int last_img_s_x = cover_x_s+cover_pen_width/2;
+    int last_img_s_y = cover_y_s+cover_pen_width/2;
+    int last_img_width = cover_x_e-cover_pen_width;
+    QPixmap last_img = Img.copy(last_img_s_x,last_img_s_y,last_img_width,last_img_width);
+    last_img.save(path);
+    is_show_border = true;
+
+    this->update();
+}
+
+
 // 鼠标移动事件       默认情况下，触发事件需要点击一下，才能触发。可设置为自动触发:setMouseTracking(true);
 void circle_head::mouseMoveEvent(QMouseEvent *event)
 {
